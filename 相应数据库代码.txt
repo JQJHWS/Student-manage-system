@@ -1,0 +1,29 @@
+-- 创建用户表 admin
+CREATE TABLE admin (
+    Username CHAR(10) PRIMARY KEY,  -- 用户名
+    password CHAR(10) NOT NULL,      -- 密码
+    Name CHAR(10)                    -- 用户昵称
+);
+
+-- 创建学生信息表 S
+CREATE TABLE S (
+    Sno NVARCHAR(50) PRIMARY KEY,     -- 学号
+    Sname NVARCHAR(50) NOT NULL,      -- 姓名
+    Sx NVARCHAR(50) NOT NULL          -- 系别
+);
+
+-- 创建课程信息表 C
+CREATE TABLE C (
+    Cno NVARCHAR(50) PRIMARY KEY,     -- 课号
+    Cname NVARCHAR(50) NOT NULL       -- 课名
+);
+
+-- 创建成绩表 SC
+CREATE TABLE SC (
+    Cno NVARCHAR(50),                  -- 课号
+    Sno NVARCHAR(50),                  -- 学号
+    C NVARCHAR(50),                    -- 成绩
+    PRIMARY KEY (Cno, Sno),            -- 复合主键
+    FOREIGN KEY (Cno) REFERENCES C(Cno),  -- 外键约束
+    FOREIGN KEY (Sno) REFERENCES S(Sno) ON DELETE CASCADE  -- 级联删除
+);
